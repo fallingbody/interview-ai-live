@@ -1,0 +1,1213 @@
+/* =============================================
+   CandidateOverview.css
+   Styles for the campaign-first candidate overview
+   Palette aligned with homepage indigo/purple theme.
+   ============================================= */
+
+/* ── Palette tokens ── */
+:root {
+  --co-indigo:     #4f46e5;
+  --co-indigo-lt:  #6265f4;
+  --co-purple:     #9333ea;
+  --co-text:       #111827;
+  --co-sub:        #1f2937;
+  --co-muted:      #6b7280;
+  --co-border:     rgba(0,0,0,0.07);
+  --co-bg:         #f9fafb;
+  --co-white:      #ffffff;
+  --co-grad:       linear-gradient(90deg, #4f46e5, #9333ea);
+}
+
+/* --- Overview shell (resets base container) --- */
+.campaign-overview-shell {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  height: calc(100vh - 82px);
+  overflow: hidden;
+}
+
+/* --- Two-column layout: rail + workspace --- */
+.campaign-overview-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 20px;
+  height: 100%;
+  min-height: 0;
+}
+
+/* --- Shared panel styling --- */
+.campaign-rail,
+.session-workspace {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--co-border);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(79,70,229,0.07);
+}
+
+/* =============================================
+   Campaign Rail (left sidebar)
+   ============================================= */
+.campaign-rail {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.campaign-rail-header {
+  margin-bottom: 18px;
+}
+
+.campaign-rail-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--co-text);
+  margin-bottom: 6px;
+}
+
+.campaign-rail-subtitle {
+  color: var(--co-muted);
+  font-size: 0.95rem;
+}
+
+/* Empty / loading placeholder */
+.campaign-rail-empty,
+.empty-session-state,
+.empty-candidate-state,
+.empty-detail-state {
+  border: 1px dashed rgba(79,70,229,0.2);
+  border-radius: 18px;
+  padding: 18px;
+  color: var(--co-muted);
+  background: rgba(238,242,255,0.5);
+  text-align: center;
+}
+
+/* Scrollable campaign list */
+.campaign-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* --- Campaign card --- */
+.campaign-card {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--co-border);
+  border-radius: 18px;
+  padding: 16px;
+  text-align: left;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.campaign-card:hover,
+.campaign-card.active {
+  transform: translateY(-2px);
+  border-color: rgba(79,70,229,0.3);
+  box-shadow: 0 12px 28px rgba(79,70,229,0.1);
+}
+
+/* Shared flex row pattern */
+.campaign-card-top,
+.candidate-card-header,
+.detail-head,
+.candidate-toolbar,
+.session-header,
+.candidate-card-footer,
+.session-metrics,
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.campaign-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--co-text);
+}
+
+.campaign-card-status {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(44, 62, 80, 0.08);
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+/* Status color variants for campaign card badges */
+.campaign-card-status.status-upcoming {
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+}
+
+.campaign-card-status.status-active {
+  background: rgba(220, 38, 38, 0.12);
+  color: #dc2626;
+}
+
+.campaign-card-status.status-expired {
+  background: rgba(107, 114, 128, 0.15);
+  color: #6b7280;
+}
+
+/* --- Full-card colour variants (whole card background) --- */
+
+/* Upcoming: subtle blue tint */
+.campaign-card.card-upcoming {
+  background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
+  border-color: rgba(79, 70, 229, 0.18);
+}
+
+/* Active: subtle warm/red-tint with left accent */
+.campaign-card.card-active {
+  background: linear-gradient(135deg, #fef2f2 0%, #fff5f5 100%);
+  border-color: rgba(220, 38, 38, 0.2);
+  border-left: 4px solid #dc2626;
+}
+
+/* Expired: muted grey — clearly "done" */
+.campaign-card.card-expired {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e9ebee 100%);
+  border-color: rgba(107, 114, 128, 0.15);
+  opacity: 0.72;
+}
+
+.campaign-card.card-expired:hover {
+  opacity: 0.92;
+}
+
+/* Muted text shared across cards */
+.campaign-card-meta,
+.campaign-card-stats,
+.toolbar-meta p,
+.session-subtitle,
+.detail-email,
+.candidate-card-content p {
+  color: var(--co-muted);
+  min-width: 0;
+}
+
+.campaign-card-meta {
+  margin: 8px 0 12px;
+  font-size: 0.9rem;
+}
+
+.campaign-card-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+/* =============================================
+   Session Workspace (right side)
+   ============================================= */
+.session-workspace {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.session-header {
+  align-items: flex-start;
+}
+
+.session-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--co-indigo-lt);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.session-title {
+  text-align: left;
+  margin-bottom: 8px;
+  font-size: clamp(2rem, 3vw, 3rem);
+}
+
+.session-subtitle {
+  font-size: 1rem;
+  margin: 0;
+  max-width: 760px;
+}
+
+.session-actions {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* --- Shared button base --- */
+.outcome-btn,
+.download-btn,
+.status-filter-btn,
+.action-btn,
+.outcome-submit-btn,
+.outcome-close-btn {
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Primary action buttons */
+.outcome-btn,
+.outcome-submit-btn,
+.action-btn.select {
+  background: var(--co-grad);
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(79,70,229,0.22);
+}
+
+.outcome-btn,
+.outcome-submit-btn {
+  padding: 14px 18px;
+}
+
+/* Disabled states */
+.outcome-btn:disabled,
+.download-btn:disabled,
+.outcome-submit-btn:disabled,
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* --- Metric pills row --- */
+.session-metrics {
+  flex-wrap: wrap;
+}
+
+.metric-pill {
+  min-width: 132px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+  border: 1px solid rgba(52, 73, 94, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-pill span {
+  color: var(--co-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.metric-pill strong {
+  color: var(--co-text);
+  font-size: 1.25rem;
+}
+
+.metric-selected strong { color: #2e7d32; }
+.metric-rejected strong { color: #c62828; }
+.metric-pending strong  { color: #b77800; }
+.metric-session-id strong { letter-spacing: 0.12em; }
+
+/* --- Error / success banners --- */
+.overview-error,
+.action-message,
+.success-box,
+.warning-box {
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.overview-error {
+  background: rgba(255, 235, 238, 0.9);
+  border: 1px solid rgba(244, 67, 54, 0.25);
+  color: #b71c1c;
+}
+
+.action-message {
+  background: rgba(232, 245, 233, 0.95);
+  border: 1px solid rgba(76, 175, 80, 0.25);
+  color: #1b5e20;
+}
+
+/* =============================================
+   Session Body: candidate list + detail panels
+   ============================================= */
+.session-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: 18px;
+  flex: 1;
+  min-height: 0;
+}
+
+.candidate-list-panel,
+.candidate-detail-panel {
+  background: rgba(248, 250, 252, 0.92);
+  border: 1px solid rgba(52, 73, 94, 0.08);
+  border-radius: 22px;
+  padding: 18px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.candidate-list-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Toolbar above candidate list --- */
+.candidate-toolbar {
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.toolbar-meta h3 {
+  color: var(--co-text);
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.toolbar-meta p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.select-all-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #334155;
+  font-weight: 600;
+}
+
+.download-btn {
+  padding: 11px 14px;
+  background: var(--co-sub);
+  color: #fff;
+}
+
+/* --- Search & filter row --- */
+.search-container {
+  margin-bottom: 14px;
+}
+
+.search-input {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid var(--co-border);
+  background: var(--co-white);
+  padding: 14px 16px;
+  color: var(--co-sub);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus {
+  border-color: var(--co-indigo);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+}
+
+.status-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.status-filter-btn {
+  padding: 10px 14px;
+  background: #f3f4f6;
+  color: var(--co-sub);
+}
+
+.status-filter-btn.active {
+  background: var(--co-grad);
+  color: #fff;
+}
+
+.candidate-sort-control {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.candidate-sort-control select {
+  min-width: 170px;
+  border: 1px solid var(--co-border);
+  border-radius: 14px;
+  background: var(--co-white);
+  color: var(--co-sub);
+  padding: 10px 34px 10px 12px;
+  font: inherit;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+}
+
+.candidate-sort-control select:focus {
+  border-color: var(--co-indigo);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+}
+
+.score-shortlist-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 160px));
+  gap: 10px;
+  margin: -4px 0 14px;
+}
+
+.score-shortlist-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--co-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.score-shortlist-panel input {
+  width: 100%;
+  border: 1px solid var(--co-border);
+  border-radius: 14px;
+  background: var(--co-white);
+  color: var(--co-sub);
+  padding: 11px 12px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  outline: none;
+}
+
+.score-shortlist-panel input:focus {
+  border-color: var(--co-indigo);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+}
+
+/* --- Candidate card list --- */
+.candidate-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+.candidate-card {
+  width: 100%;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--co-border);
+  background: var(--co-white);
+  text-align: left;
+}
+
+.candidate-card:hover,
+.candidate-card.active {
+  border-color: rgba(79,70,229,0.28);
+  box-shadow: 0 8px 24px rgba(79,70,229,0.08);
+  transform: translateY(-1px);
+}
+
+.candidate-checkbox {
+  margin-top: 4px;
+}
+
+.candidate-card-content {
+  flex: 1;
+}
+
+.candidate-card-header h4 {
+  color: var(--co-text);
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.candidate-card-header p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.candidate-card-footer {
+  margin-top: 10px;
+  color: #64748b;
+  font-size: 0.88rem;
+  flex-wrap: wrap;
+}
+
+/* --- Status badge (shared) --- */
+.status-badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.status-selected {
+  background: rgba(46, 125, 50, 0.12);
+  color: #2e7d32;
+}
+
+.status-rejected {
+  background: rgba(198, 40, 40, 0.12);
+  color: #c62828;
+}
+
+.status-pending,
+.status-completed {
+  background: rgba(183, 120, 0, 0.12);
+  color: #a16207;
+}
+
+/* =============================================
+   Candidate Detail Panel (right side)
+   ============================================= */
+.candidate-detail-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+  scrollbar-gutter: stable;
+}
+
+.detail-head {
+  align-items: flex-start;
+}
+
+.detail-label {
+  color: #6b7785;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.detail-head h3 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.detail-email {
+  margin: 0;
+}
+
+/* Info grid (session, decision date, etc.) */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.detail-grid > div,
+.detail-section {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(52, 73, 94, 0.08);
+}
+
+.detail-grid > div {
+  padding: 14px;
+}
+
+.detail-grid span,
+.detail-section h4 {
+  color: var(--co-muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.detail-grid strong {
+  display: block;
+  color: var(--co-text);
+  margin-top: 6px;
+}
+
+/* Expandable sections (summary, strengths, etc.) */
+.detail-section {
+  padding: 16px;
+}
+
+.detail-section h4 {
+  margin-bottom: 10px;
+}
+
+.detail-section p,
+.detail-section li {
+  color: #334155;
+  line-height: 1.7;
+}
+
+.detail-section ul {
+  padding-left: 18px;
+}
+
+.detail-section.split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Action buttons row */
+.detail-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  padding: 12px 16px;
+}
+
+.action-btn.reject,
+.outcome-close-btn {
+  background: #eef2f7;
+  color: #1f2937;
+}
+
+/* =============================================
+   Outcome Modal
+   ============================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 2500;
+}
+
+.outcome-modal {
+  width: min(620px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.24);
+}
+
+.outcome-modal h2 {
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.warning-box {
+  background: rgba(255, 248, 225, 0.95);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  color: #8a5b00;
+  margin: 14px 0 18px;
+}
+
+.template-block {
+  margin-bottom: 16px;
+}
+
+.template-block label {
+  display: block;
+  color: #2e7d32;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.template-block textarea {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(52, 73, 94, 0.14);
+  padding: 12px 14px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.success-box {
+  margin: 14px 0;
+  background: rgba(232, 245, 233, 0.95);
+  border: 1px solid rgba(76, 175, 80, 0.25);
+  color: #1b5e20;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-actions {
+  margin-top: 16px;
+}
+
+.outcome-close-btn,
+.outcome-submit-btn {
+  padding: 12px 16px;
+}
+
+/* =============================================
+   Overall Performance Section
+   ============================================= */
+.overall-performance-section {
+  background: linear-gradient(135deg, #eef2ff 0%, #ede9fe 100%) !important;
+  border-color: rgba(79,70,229,0.15) !important;
+}
+
+.performance-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.score-badge-large {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  background: var(--co-grad);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(79,70,229,0.25);
+}
+
+.score-value {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+.performance-level {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.level-beginner { background: rgba(239, 68, 68, 0.12); color: #dc2626; }
+.level-intermediate { background: rgba(245, 158, 11, 0.12); color: #d97706; }
+.level-advanced { background: rgba(34, 197, 94, 0.12); color: #16a34a; }
+.level-expert { background: rgba(79, 70, 229, 0.12); color: #4f46e5; }
+
+.performance-summary {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =============================================
+   Section-wise Evaluation
+   ============================================= */
+.section-eval-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.section-eval-card {
+  background: #fff;
+  border: 1px solid rgba(52, 73, 94, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.section-eval-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.section-eval-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.section-eval-score {
+  font-size: 1.1rem;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+.score-high { background: rgba(34, 197, 94, 0.12); color: #16a34a; }
+.score-mid  { background: rgba(245, 158, 11, 0.12); color: #d97706; }
+.score-low  { background: rgba(239, 68, 68, 0.12); color: #dc2626; }
+
+.section-eval-feedback {
+  color: #64748b;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* =============================================
+   Face Analysis & Proctoring Sections
+   ============================================= */
+.face-analysis-section, .proctoring-section {
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%) !important;
+}
+
+.face-analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 12px;
+}
+
+.face-stat {
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.face-stat-label {
+  color: #6b7785;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.face-stat-value {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+.face-stat-value small {
+  font-size: 0.78rem;
+  font-weight: 600;
+  opacity: 0.6;
+}
+
+.emoji-value {
+  text-transform: capitalize;
+}
+
+.verified-badge {
+  color: #16a34a !important;
+  text-transform: capitalize;
+}
+
+.unverified-badge {
+  color: #dc2626 !important;
+  text-transform: capitalize;
+}
+
+.behavior-assessment {
+  color: #475569;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0;
+  padding-top: 6px;
+  border-top: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+/* =============================================
+   AI Recommendation Section
+   ============================================= */
+.recommendation-section {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%) !important;
+  border-color: rgba(245, 158, 11, 0.15) !important;
+}
+
+.recommendation-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.rec-positive {
+  background: rgba(34, 197, 94, 0.15);
+  color: #15803d;
+}
+
+.rec-negative {
+  background: rgba(239, 68, 68, 0.15);
+  color: #dc2626;
+}
+
+/* =============================================
+   Scrollable detail panel
+   ============================================= */
+.candidate-detail-panel {
+  max-height: none;
+  overflow-y: auto;
+}
+
+/* =============================================
+   Responsive — 4 breakpoints
+   ============================================= */
+
+/* ── Laptop (1024px – 1279px) ────────────────── */
+/* Side-by-side still works, just tighten the rail */
+@media (max-width: 1279px) {
+  .campaign-overview-layout {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .session-body {
+    grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+  }
+  .session-metrics { flex-wrap: wrap; gap: 8px; }
+  .metric-pill { min-width: 110px; }
+}
+
+/* ── Tablet (768px – 1023px) ─────────────────── */
+/* Keep rail side-by-side but narrower.
+   Stack session-body (list above detail).
+   Campaign cards remain VERTICAL so they're easy to select. */
+@media (max-width: 1023px) {
+  .campaign-overview-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  /* Rail: stays visible as a narrow column; vertical scroll */
+  .campaign-rail {
+    min-height: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Session body stacks */
+  .session-body { grid-template-columns: 1fr; gap: 14px; }
+
+  /* Candidate list gets its own scroll */
+  .candidate-list { max-height: 45vh; }
+  .candidate-detail-panel { max-height: none; }
+
+  /* Metric pills wrap */
+  .session-metrics { flex-wrap: wrap; gap: 8px; }
+  .metric-pill { min-width: 100px; }
+
+  /* Header stacks on tablet */
+  .session-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+  /* Keep 3-col eval grid on tablet */
+  .section-eval-grid { grid-template-columns: repeat(3, 1fr); }
+  .face-analysis-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Mobile (≤ 767px) ────────────────────────── */
+/* Stack everything vertically.
+   Campaign rail sits on top as a compact scrollable block.
+   Cards stay VERTICAL and full-width (tappable).
+   NO horizontal scroll — that was the selection bug. */
+@media (max-width: 767px) {
+
+  /* Single-column page layout */
+  .campaign-overview-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* ── Campaign Rail ── */
+  /* Compact scrollable block at top. Height fixed so page
+     doesn't get too long. Overflow-y:auto is the key fix —
+     NOT overflow:hidden which clipped clickable areas. */
+  .campaign-rail {
+    min-height: auto;
+    max-height: 220px;
+    overflow-y: auto;   /* vertical scroll — cards stay selectable */
+    overflow-x: hidden;
+    padding: 14px;
+  }
+
+  /* Campaign list: vertical (full-width cards, easy to tap) */
+  .campaign-list {
+    flex-direction: column;
+    overflow-y: visible;
+    overflow-x: hidden;
+    gap: 10px;
+    padding-right: 0;
+  }
+
+  /* Campaign cards: full width */
+  .campaign-card {
+    min-width: 0;
+    width: 100%;
+    flex-shrink: unset;
+  }
+
+  /* ── Session Workspace ── */
+  .session-workspace { padding: 14px; }
+
+  /* Session body: list on top, detail below */
+  .session-body { grid-template-columns: 1fr; gap: 14px; }
+
+  /* All nested grids: single column */
+  .detail-section.split,
+  .detail-grid,
+  .section-eval-grid,
+  .face-analysis-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack all flex rows */
+  .session-header,
+  .candidate-toolbar,
+  .candidate-card-header,
+  .candidate-card-footer,
+  .detail-head,
+  .modal-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  /* Toolbar actions & detail actions wrap */
+  .toolbar-actions,
+  .detail-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Full-width buttons */
+  .outcome-btn,
+  .download-btn,
+  .action-btn,
+  .outcome-submit-btn,
+  .outcome-close-btn {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+  }
+
+  /* Panels */
+  .candidate-list-panel,
+  .candidate-detail-panel { padding: 14px; }
+
+  /* Status filter pills */
+  .status-filter-row { gap: 8px; }
+  .status-filter-btn { flex: 1; text-align: center; min-width: 0; }
+  .candidate-sort-control {
+    width: 100%;
+  }
+  .candidate-sort-control select {
+    flex: 1;
+    min-width: 0;
+  }
+  .score-shortlist-panel {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Metric pills: 2-column grid */
+  .session-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .metric-pill { min-width: 0; }
+
+  /* Candidate + detail panels: natural height */
+  .candidate-list { max-height: 55vh; }
+  .candidate-detail-panel { max-height: none; }
+
+  /* Modal */
+  .outcome-modal { border-radius: 16px; padding: 16px; }
+
+  /* Titles */
+  .session-title { font-size: 1.5rem !important; }
+  .campaign-rail-header { margin-bottom: 10px; }
+}
+
+/* ── Small Mobile (≤ 480px) ─────────────────── */
+@media (max-width: 480px) {
+  .session-title { font-size: 1.25rem !important; }
+  .campaign-rail-title { font-size: 1.2rem; }
+  .metric-pill strong { font-size: 1.1rem; }
+  .score-value { font-size: 1.5rem; }
+  .campaign-rail { max-height: 200px; }
+  .session-metrics { grid-template-columns: 1fr 1fr; }
+}
+
+/* --- Well Done Badge --- */
+.well-done-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+  animation: pulse-green 2s infinite ease-in-out;
+  margin-top: 4px;
+}
+
+@keyframes pulse-green {
+  0% { transform: scale(1); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); }
+  50% { transform: scale(1.03); box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4); }
+  100% { transform: scale(1); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); }
+}

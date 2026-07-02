@@ -1,0 +1,144 @@
+/* =========================================================
+   InterviewCheck.css  — ic- prefix
+   ========================================================= */
+
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --ic-blue:    #3498db;
+  --ic-green:   #2d8659;
+  --ic-red:     #c0392b;
+  --ic-text:    #2c3e50;
+  --ic-muted:   #7f8c8d;
+  --ic-bg:      #f8f9fa;
+  --ic-border:  #e9ecef;
+  --ic-warn-bg: #fff3cd;
+  --ic-warn-bd: #ffeeba;
+  --ic-warn-tx: #856404;
+  --ic-radius:  10px;
+}
+
+/* ── Page ────────────────────────────────────────────────── */
+.ic-page {
+  text-align: center;
+  padding: 24px 20px;
+  min-height: 100vh;
+  background: #fff;
+  color: var(--ic-text);
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.ic-title {
+  font-size: 1.75rem;
+  margin-bottom: 6px;
+}
+
+.ic-highlight { color: var(--ic-blue); }
+
+.ic-subtitle {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* ── Card ───────────────────────────────────────────────── */
+.ic-card {
+  margin: 0 auto 24px;
+  width: min(820px, 92%);
+  background: var(--ic-bg);
+  padding: 24px;
+  border-radius: 12px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Form elements ─────────────────────────────────────── */
+.ic-label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.ic-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #dfe6ee;
+  margin-bottom: 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.ic-input:focus { border-color: var(--ic-blue); }
+
+.ic-btn-row { margin-top: 14px; }
+
+.ic-btn {
+  padding: 12px 20px;
+  background: var(--ic-blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.ic-btn:hover { opacity: 0.88; }
+
+/* ── Inline error ─────────────────────────────────────── */
+.ic-error { color: #d9534f; margin-top: 8px; font-size: 0.9rem; }
+
+/* ── Instructions ─────────────────────────────────────── */
+.ic-section-title {
+  margin-top: 28px;
+  font-size: 1rem;
+  color: var(--ic-text);
+}
+
+.ic-warn {
+  background: var(--ic-warn-bg);
+  border: 1px solid var(--ic-warn-bd);
+  color: var(--ic-warn-tx);
+  padding: 14px;
+  border-radius: 8px;
+  margin-top: 14px;
+  font-size: 0.92rem;
+}
+
+.ic-list {
+  margin-top: 14px;
+  padding-left: 20px;
+  line-height: 1.7;
+  color: var(--ic-text);
+}
+
+.ic-quote {
+  text-align: center;
+  margin-top: 18px;
+  font-style: italic;
+  color: var(--ic-text);
+}
+
+.ic-divider { margin: 18px 0; border: none; border-top: 1px solid var(--ic-border); }
+
+/* ── Status area ─────────────────────────────────────── */
+.ic-status-area {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ic-ready-title { color: var(--ic-green); }
+
+.ic-error-block {
+  color: var(--ic-red);
+  margin-top: 8px;
+}
+
+/* ── Footer ──────────────────────────────────────────── */
+.ic-footer {
+  color: var(--ic-muted);
+  font-size: 0.88rem;
+  margin-top: 8px;
+}

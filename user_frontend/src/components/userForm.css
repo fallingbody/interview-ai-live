@@ -1,0 +1,225 @@
+/* =========================================================
+   UserForm.css  — uf- prefix
+   ========================================================= */
+
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --uf-blue:   #3498db;
+  --uf-blue2:  #2980b9;
+  --uf-red:    #e74c3c;
+  --uf-text:   #2c3e50;
+  --uf-muted:  #7f8c8d;
+  --uf-bg:     #f8f9fa;
+  --uf-white:  #ffffff;
+  --uf-border: #e9ecef;
+}
+
+/* ── Page ────────────────────────────────────────────────── */
+.uf-page {
+  background: var(--uf-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--uf-text);
+}
+
+/* ── Header / Logo ──────────────────────────────────────── */
+.uf-header {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.uf-logo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--uf-blue), var(--uf-blue2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: absolute;
+  top: 20px;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.uf-card {
+  background: var(--uf-white);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.1);
+  max-width: 560px;
+  width: 95%;
+  margin-top: 60px;
+  animation: uf-fade 0.6s ease-out;
+}
+
+.uf-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--uf-blue);
+  text-align: center;
+  margin-bottom: 0.4rem;
+}
+
+.uf-desc {
+  text-align: center;
+  color: var(--uf-muted);
+  margin-bottom: 1.8rem;
+  font-size: 0.95rem;
+}
+
+/* ── Form elements ─────────────────────────────────────── */
+.uf-group { margin-bottom: 1.2rem; }
+
+.uf-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.uf-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--uf-border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--uf-text);
+  background: var(--uf-bg);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.uf-input:focus { border-color: var(--uf-blue); background: var(--uf-white); }
+
+.uf-file {
+  width: 100%;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  color: var(--uf-text);
+}
+
+/* ── Error ────────────────────────────────────────────── */
+.uf-error {
+  color: var(--uf-red);
+  background: #fbecec;
+  border: 1px solid var(--uf-red);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+/* ── Submit button ────────────────────────────────────── */
+.uf-submit {
+  width: 100%;
+  padding: 0.95rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--uf-blue), var(--uf-blue2));
+  color: var(--uf-white);
+  box-shadow: 0 5px 18px rgba(52, 152, 219, 0.3);
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+.uf-submit:hover    { box-shadow: 0 7px 24px rgba(52, 152, 219, 0.45); }
+.uf-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Footer ──────────────────────────────────────────── */
+.uf-footer {
+  color: var(--uf-muted);
+  font-size: 0.82rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.uf-highlight {
+  color: var(--uf-blue);
+  font-weight: 700;
+}
+
+/* ── Scanning & Image Handling (v2) ───────────────────── */
+.uf-scanning-loader {
+  font-size: 0.85rem;
+  color: var(--uf-blue);
+  margin-top: 8px;
+  font-style: italic;
+  animation: uf-pulse 1.5s infinite;
+}
+
+.uf-scan-status {
+  font-size: 0.85rem;
+  margin-top: 8px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.uf-scan-success {
+  color: #27ae60;
+  background: #eafaf1;
+}
+
+.uf-scan-warning {
+  color: #d35400;
+  background: #fdf2e9;
+}
+
+.uf-image-box {
+  background: #f3f8fd;
+  border: 1px solid #cfe4f7;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  animation: uf-slide-down 0.3s ease-out;
+}
+
+.uf-image-title {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--uf-blue2);
+}
+
+.uf-image-desc {
+  margin: 0 0 10px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--uf-text);
+}
+
+.uf-group--tight {
+  margin-bottom: 0;
+}
+
+.uf-preview-container img {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.uf-preview-container img:hover {
+  transform: scale(1.05);
+}
+
+/* ── Animation ─────────────────────────────────────────── */
+@keyframes uf-fade {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes uf-pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+@keyframes uf-slide-down {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-interview-engine"
+version = "0.1.0"
+description = "Production-grade autonomous AI interview system using Flask, Redis, and LLMs"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Suhel", email = "suhels19914@gmail.com" }
+]
+
+dependencies = [
+    # --- Core ---
+    "flask>=2.3",
+    "python-dotenv>=1.0",
+    "pydantic>=2.0",
+    "marshmallow>=3.20",
+
+    # --- Database ---
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+    "psycopg2-binary>=2.9",
+
+    # --- Redis ---
+    "redis>=5.0",
+
+    # --- LLM / HTTP ---
+    "requests>=2.31",
+    "huggingface-hub>=0.20",
+    "langchain>=0.1.0",
+    "langchain-core>=0.1.0",
+    "langchain-huggingface>=0.1.0",
+    "google-generativeai>=0.5.2",
+
+    # --- Observability ---
+    "prometheus-client>=0.19",
+    "opentelemetry-api>=1.22",
+    "opentelemetry-sdk>=1.22",
+
+    # --- Utils ---
+    "python-multipart>=0.0.9",
+    "uuid7>=0.1.0",
+    "deepface>=0.0.93",
+    "opencv-python-headless>=4.9",
+
+    # --- Server ---
+    "gunicorn>=21.2"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "black>=24.1",
+    "isort>=5.13",
+    "flake8>=7.0"
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["app/tests"]

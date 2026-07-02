@@ -1,0 +1,158 @@
+/* =========================================================
+   StartInterview.css  — si- prefix
+   ========================================================= */
+
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --si-blue:   #3498db;
+  --si-blue2:  #2980b9;
+  --si-green:  #27ae60;
+  --si-green2: #1e8449;
+  --si-red:    #e74c3c;
+  --si-text:   #2c3e50;
+  --si-muted:  #7f8c8d;
+  --si-bg:     #f8f9fa;
+  --si-white:  #ffffff;
+  --si-border: #e9ecef;
+}
+
+/* ── Page ────────────────────────────────────────────────── */
+.si-page {
+  background: var(--si-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+  color: var(--si-text);
+}
+
+/* ── Header / Logo ──────────────────────────────────────── */
+.si-header {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  animation: si-fade 0.8s ease-out;
+}
+
+.si-logo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--si-blue), var(--si-blue2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: absolute;
+  top: 20px;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.si-card {
+  background: var(--si-white);
+  border-radius: 1rem;
+  padding: 3rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  max-width: 800px;
+  width: 95%;
+  text-align: left;
+  animation: si-fade 0.8s ease-out;
+  margin-top: 50px;
+}
+
+.si-card-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--si-blue);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.si-card-desc {
+  font-size: 1rem;
+  color: var(--si-text);
+  text-align: center;
+  border-bottom: 1px solid var(--si-border);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* ── Checklist ───────────────────────────────────────────── */
+.si-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.si-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.si-icon {
+  color: var(--si-green);
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Error & Motivation ─────────────────────────────────── */
+.si-error {
+  color: var(--si-red);
+  background: #fbecec;
+  border: 1px solid var(--si-red);
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.si-motivation {
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--si-blue2);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Start button ───────────────────────────────────────── */
+.si-start-btn {
+  width: 100%;
+  padding: 1.1rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--si-green), var(--si-green2));
+  color: var(--si-white);
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.35);
+  transition: box-shadow 0.25s, opacity 0.2s;
+}
+.si-start-btn:hover  { box-shadow: 0 8px 26px rgba(39, 174, 96, 0.5); }
+.si-start-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Footer ─────────────────────────────────────────────── */
+.si-footer {
+  color: var(--si-muted);
+  font-size: 0.8rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.si-highlight {
+  color: var(--si-blue);
+  font-weight: 700;
+}
+
+/* ── Animation ──────────────────────────────────────────── */
+@keyframes si-fade {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

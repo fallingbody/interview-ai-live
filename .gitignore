@@ -1,0 +1,79 @@
+.venv/
+__pycache__/
+*.pyc
+*.db
+.pytest_cache/
+scripts/generated_tokens.json
+/ai-auto-interview-main
+/done
+/done
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets and local env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Logs and runtime artifacts
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+dist/
+build/
+*.egg-info/
+.venv/
+venv/
+
+# Node
+node_modules/
+.npm/
+.pnpm-store/
+
+# Frontend build output
+frontend/build/
+user_frontend/build/
+
+# Uploads and generated media
+backend/uploads/
+ai/uploads/
+
+# Local credentials
+backend/credentials/
+
+# Databases
+*.sqlite3
+*.db
+
+# Model assets and binary downloads
+/models/
+/ai/models/
+*.onnx
+*.task
+*.pt
+*.wav
+ai/audio.wav
+ai/logs/
+*.csv

@@ -1,0 +1,36 @@
+name: Sync AI Engine to Hugging Face
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ai/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.repository == 'fallingbody/Interview-ai'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Push to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          # We clone the HF repo first to merge histories properly
+          git clone https://fallingbody:$HF_TOKEN@huggingface.co/spaces/fallingbody/local-ai hf_repo
+          
+          # Sync local 'ai' folder to the HF repo.
+          # We use --delete to remove old files, but specifically EXCLUDE audio.wav and .gitattributes
+          # so that Hugging Face's LFS (Large File Storage) config doesn't get destroyed!
+          rsync -av --delete --exclude='.git' --exclude='.gitattributes' --exclude='.env' --exclude='audio.wav' ai/ hf_repo/
+          
+          cd hf_repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add .
+          git commit -m "Auto-sync from GitHub Actions" || echo "No changes to commit"
+          git push origin main

@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  # --- Infrastructure ---
+  redis:
+    image: redis:7-alpine
+    container_name: interview-ai-redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  db:
+    image: postgres:15-alpine
+    container_name: interview-ai-db
+    environment:
+      POSTGRES_DB: ai_interview
+      POSTGRES_USER: ai_user
+      POSTGRES_PASSWORD: ai_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+  # --- AI Engine (Python/Flask) ---
+  ai-engine:
+    build:
+      context: ./ai
+      dockerfile: Dockerfile
+    container_name: interview-ai-engine
+    ports:
+      - "5000:8000"  # Mapping internal 8000 (gunicorn) to external 5000 (README default)
+    env_file:
+      - ./ai/.env
+    environment:
+      - DATABASE_URL=postgresql://ai_user:ai_password@db:5432/ai_interview
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+      - db
+    restart: always
+
+  # --- Core Backend (Node.js/Express) ---
+  core-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: interview-ai-core
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - ai-engine
+    restart: always
+
+volumes:
+  pgdata:

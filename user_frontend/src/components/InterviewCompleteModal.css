@@ -1,0 +1,42 @@
+/* =========================================================
+   InterviewCompleteModal.css  — icm- prefix
+   ========================================================= */
+
+.icm-overlay {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;           /* white takeover screen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.icm-box {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.icm-title {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.icm-message {
+  font-size: 1.15rem;
+  color: #34495e;
+  margin-bottom: 0.5rem;
+}
+
+.icm-subtext {
+  font-size: 1rem;
+  color: #7f8c8d;
+  line-height: 1.6;
+}
