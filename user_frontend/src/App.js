@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 import UserForm from "./components/UserForm.jsx";
-import UserInterviewRoom from "./components/UserInterviewRoom.jsx";
+import LiveInterviewRoom from "./components/LiveInterviewRoom.jsx";
 
 import StartInterview from "./components/StartInterview.jsx";
 import InterviewCheck from "./components/InterviewCheck.jsx";
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/interviewcheck/:sessionId" element={<InterviewCheck />} />
         <Route path="/userform/:id" element={<UserForm />} />
-        <Route path="/interviewroom" element={<UserInterviewRoom />} />
+        <Route path="/interviewroom" element={<LiveInterviewRoom />} />
         <Route path="/startinterview" element={<StartInterview />} />
         </Routes>
     </Router>

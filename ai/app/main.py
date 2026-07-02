@@ -82,14 +82,26 @@ def create_app(testing: bool = False) -> Flask:
 
     return app
 
-app = create_app()
+flask_app = create_app()
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from a2wsgi import WSGIMiddleware
+from app.api.routes.websocket_routes import router as ws_router
+
+app = FastAPI(title="Interview AI ASGI Wrapper")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(ws_router)
+app.mount("/", WSGIMiddleware(flask_app))
+
 if __name__ == "__main__":
-    '''
-    This is for the development mode 
-    '''
-    # app.run(
-    #     host="0.0.0.0",
-    #     port=8000, 
-    #     debug=settings.DEBUG,
-    # )
-    app.run()
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
