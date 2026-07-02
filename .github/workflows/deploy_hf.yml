@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.repository == 'fallingbody/Interview-ai'
+    if: github.repository == 'fallingbody/interview-ai-live'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -20,7 +20,7 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           # We clone the HF repo first to merge histories properly
-          git clone https://fallingbody:$HF_TOKEN@huggingface.co/spaces/fallingbody/local-ai hf_repo
+          git clone https://fallingbody:$HF_TOKEN@huggingface.co/spaces/fallingbody/interview-ai-live-backend hf_repo
           
           # Sync local 'ai' folder to the HF repo.
           # We use --delete to remove old files, but specifically EXCLUDE audio.wav and .gitattributes
