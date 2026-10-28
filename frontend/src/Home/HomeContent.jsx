@@ -14,18 +14,6 @@ import {
   useSpring,
 } from "framer-motion";
 
-/* ─── Google Fonts ───────────────────────────────── */
-const FontInjector = () => {
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href =
-      "https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap";
-    document.head.appendChild(link);
-  }, []);
-  return null;
-};
-
 /* ─── Design tokens ──────────────────────────────── */
 const T = {
   bg: "#FAFAF8",
@@ -1155,7 +1143,6 @@ const HomeContent = ({ onGetStarted, onExploreDashboard }) => {
 
   return (
     <div id="top-anchor" style={{ fontFamily: T.sans, background: T.bg, overflowX: "hidden" }}>
-      <FontInjector />
       <Hero
         onGetStarted={onGetStarted}
         onExploreDashboard={onExploreDashboard}
