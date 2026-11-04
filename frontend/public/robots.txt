@@ -1,3 +1,13 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# Private candidate and interview rooms
+Disallow: /interviewcheck/
+Disallow: /userform/
+Disallow: /interviewroom/
+Disallow: /startinterview/
+Disallow: /otp
+Disallow: /forgot
+
+Sitemap: https://interview-ai-admin-dashboard.vercel.app/sitemap.xml
